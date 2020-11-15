@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>quizDetails</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+
+      <ion-col col="10">
+        <div id="questionText" style="font-size:large;">
+          {{question.questionText }}
+        </div>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button size="small" color="tertiary" (click)="clickSpeach(question.questionText)">
+          <ion-icon slot="icon-only" name="volume-medium-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+  <img *ngIf="question.imgUrl" class="center" src="{{question.imgUrl}}" alt="" size="100">
+
+
+
+  <ion-list *ngIf="question.questionType.name=='Multiple'">
+
+    <ion-list-header>
+      <ion-label>Avilabel Answers</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let a of question.answers; let i = index" (click)="getCheckedvalue()">
+      <ion-label [ngStyle]="{'background-color': a.isCorrect&&!isCorrect? 'lightgreen' : null}"
+        style="font-size:medium;">{{a.answerText}}</ion-label>
+      <img *ngIf="a.imgUrl" src="{{a.imgUrl}}" alt="" style="width:100px;height:100px;">
+      <ion-checkbox [(ngModel)]="a.isChecked"></ion-checkbox>
+    </ion-item>
+
+  </ion-list>
+
+
+
+  <ion-list *ngIf="question.questionType.name=='Single'">
+    <ion-list-header>
+      <ion-label>Avilabel Answers</ion-label>
+    </ion-list-header>
+
+    <ion-radio-group value="biff" (ionChange)="radioGroupAnswerChanged($event)">
+      <ion-item *ngFor="let a of question.answers; let i = index">
+        <ion-label [ngStyle]="{'background-color': a.isCorrect&&!isCorrect? 'lightgreen' : null}">{{a.answerText}}
+        </ion-label>
+        <img *ngIf="a.imgUrl" src="{{a.imgUrl}}" alt="" style="width:100px;height:100px;">
+        <ion-radio slot="end" [value]="a" ngDefaultControl></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+  </ion-list>
+
+  <ion-list *ngIf="question.questionType.name=='Entry'">
+    <ion-list-header>
+      <ion-label>Avilabel Answers</ion-label>
+    </ion-list-header>
+
+    <ion-radio-group value="biff" (ionChange)="radioGroupAnswerChanged($event)">
+      <ion-item *ngFor="let a of question.answers; let i = index">
+        <ion-label [ngStyle]="{'background-color': a.isCorrect&&!isCorrect? 'lightgreen' : null}">
+        </ion-label>
+        <img *ngIf="a.imgUrl" src="{{a.imgUrl}}" alt="" style="width:100px;height:100px;">
+        <ion-input value=""></ion-input>
+        <!-- <ion-radio slot="end" [value]="a" ngDefaultControl></ion-radio> -->
+      </ion-item>
+    </ion-radio-group>
+
+  </ion-list>
+
+</ion-content>
+<ion-footer>
+
+
+
+
+  <ion-row>
+    <ion-col>
+      <ion-button expand="full" color="warning" (click)="moveNext()" *ngIf="!isCorrect">Next</ion-button>
+      <ion-button expand="full" color="success" (click)="submit()" *ngIf="isCorrect && selectedAnswers">Submit
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-footer>

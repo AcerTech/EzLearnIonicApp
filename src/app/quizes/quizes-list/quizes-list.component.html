@@ -1,0 +1,86 @@
+<form #form="ngForm">
+  <ion-item>
+    <!-- <ion-label>Gaming</ion-label> -->
+    <ion-select interface="popover" [(ngModel)]="grade" name="grade" value="{{defaultGradeId}}" placeholder="Grade"
+      (ionChange)="onGradeChange($event)" ngDefaultControl>
+      <ion-select-option *ngFor="let g of gradesList; i as index" [value]="g._id">
+        {{g.name}}
+      </ion-select-option>
+    </ion-select>
+
+    <!-- <select class="form-control" [(ngModel)]="grade" placeholder="Grade" id="grade" (change)="onGradeChange()">
+      <option *ngFor="let g of gradesList ;i as index;" [ngValue]="g._id">
+        {{g.name}}
+      </option>
+    </select> -->
+
+    <ion-select interface="popover" [(ngModel)]="subject" name="subject" value="{{defaultSubjectId}}" placeholder="Subject"
+      (ionChange)="onSubjectChange($event)" ngDefaultControl>
+      <ion-select-option *ngFor="let s of subjectsList" [value]="s._id">{{s.name}}
+      </ion-select-option>
+    </ion-select>
+
+  </ion-item>
+</form>
+
+<!-- <ion-content>
+  <ion-list>
+    <ion-item-group *ngFor="let c of chaptersGroupedList">
+      <ion-item-divider color="secondary">
+        {{c.chapter}}
+      </ion-item-divider>
+      <ion-item *ngFor="let q of c.quizes">
+        <ion-row>
+          <ion-col>
+            <h4>{{q.quiz}}</h4>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content> -->
+
+
+
+
+<!-- size-sm="6" size="4" size="12" size="12" -->
+<ion-content>
+  <ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let c of chaptersGroupedList; index as i" size-xs="12">
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle color="primary">
+                <ion-row>
+                  <ion-col size="2">
+                    {{i+1}}
+                  </ion-col>
+                  <ion-col size="10" style="font-size:large;">
+                    {{c.chapter}}
+                  </ion-col>
+                </ion-row>
+
+              </ion-card-subtitle>
+              <!-- <ion-card-title>{{c.chapter}}</ion-card-title> -->
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item *ngFor="let q of c.quizes; index as x" (click)="onSelecteQuiz(q)" detail>
+                <ion-row>
+                  <ion-col>
+                    <h3>{{i+1}}-{{x+1}} {{q.quiz}}</h3>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+  </ion-list>
+</ion-content>

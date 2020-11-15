@@ -1,0 +1,7 @@
+{
+  "name": "EzLearnApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

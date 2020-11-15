@@ -1,0 +1,21 @@
+select {
+  /* Applies to the value and placeholder color */
+  color: #545ca7;
+
+  /* Set a different placeholder color */
+  --placeholder-color: blue;
+
+  /* Set full opacity on the placeholder */
+  --placeholder-opacity: 1;
+}
+
+.my-custom-class .popover-content {
+  --background: #222;
+}
+
+ion-card {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
